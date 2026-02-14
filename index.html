@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คำถามวาเลนไทน์ 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff8ecf, #ffc6e6);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.box {
+  background: white;
+  width: 90%;
+  max-width: 380px;
+  padding: 35px 25px;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+h2 {
+  color: #ff4da6;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.correct {
+  background: #ff4da6;
+  color: white;
+}
+
+.wrong {
+  background: #ddd;
+}
+
+#finalMessage {
+  display: none;
+  font-size: 20px;
+  color: #ff2e93;
+  margin-top: 20px;
+  animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+/* หัวใจลอย */
+.heart {
+  position: absolute;
+  color: #ff4da6;
+  font-size: 20px;
+  animation: float 4s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <!-- ข้อ 1 (ถูกขวา) -->
+  <div class="question">
+    <h2>เราเจอกันครั้งแรกที่ไหน</h2>
+    <button class="wrong" onclick="next(false)">TikTok</button>
+    <button class="correct" onclick="next(true)">threads</button>
+  </div>
+
+  <!-- ข้อ 2 (ถูกซ้าย) -->
+  <div class="question" style="display:none;">
+    <h2>วันแรกที่เทอทักมาหาเค้า</h2>
+    <button class="correct" onclick="next(true)">16 ธันวา 68</button>
+    <button class="wrong" onclick="next(false)">19 ธันวา 68</button>
+  </div>
+
+  <!-- ข้อ 3 (ถูกขวา) -->
+  <div class="question" style="display:none;">
+    <h2>วันครบรอบเราวันหนายยย</h2>
+    <button class="wrong" onclick="next(false)">11</button>
+    <button class="correct" onclick="next(true)">9</button>
+  </div>
+
+  <!-- ข้อ 4 (ถูกซ้าย) -->
+  <div class="question" style="display:none;">
+    <h2>วันเกิดเค้าวานหนายยยย</h2>
+    <button class="correct" onclick="next(true)">30 สิงหา</button>
+    <button class="wrong" onclick="next(false)">31 สิงหา</button>
+  </div>
+
+  <!-- ข้อ 5 (ถูกซ้าย) -->
+  <div class="question" style="display:none;">
+    <h2>เค้าอยากเข้าโรงเรียนอาใยยย</h2>
+    <button class="correct" onclick="next(true)">ยุพราชวิทยาลัย</button>
+    <button class="wrong" onclick="next(false)">ดาราวิทยาลัย</button>
+  </div>
+
+  <!-- ข้อความสุดท้าย -->
+  <div id="finalMessage">
+    สุขสันต์วันวาเลนไทน์นะคับแฟนเค้าเค้ารัคเทอที่สูดดดอยู่กับเค้าไปนานนานนคับ💖
+  </div>
+
+</div>
+
+<script>
+let current = 0;
+const questions = document.querySelectorAll(".question");
+const finalMessage = document.getElementById("finalMessage");
+
+function next(answer) {
+  if (!answer) return; // ถ้ากดผิด ไม่ไปต่อ
+
+  questions[current].style.display = "none";
+  current++;
+
+  if (current < questions.length) {
+    questions[current].style.display = "block";
+  } else {
+    finalMessage.style.display = "block";
+    launchHearts();
+  }
+}
+
+function launchHearts() {
+  for (let i = 0; i < 20; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "100vh";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    document.body.appendChild(heart);
+  }
+}
+</script>
+
+</body>
+</html>
